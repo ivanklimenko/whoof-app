@@ -12,7 +12,7 @@ const settingsGroups=[
  [{id:'faq',label:'FAQ',Icon:Question},{id:'support',label:'Поддержка',Icon:ChatCircle}],
 ];
 const settingsTitles:Record<string,string>={security:'Настройки безопасности','notification-settings':'Уведомления',language:'Язык',about:'О нас',privacy:'Политика приватности',terms:'Правила пользования',faq:'FAQ',support:'Поддержка',collar:'Настройки устройства'};
-const DOG = '/assets/whoof/dog-color.png', MAP = '/assets/whoof/park-map.png';
+const DOG = import.meta.env.BASE_URL + 'assets/whoof/dog-color.png', MAP = import.meta.env.BASE_URL + 'assets/whoof/park-map.png';
 // Small category icons use the same surface and color tokens throughout the app.
 function AccentIcon({icon:Icon,tone='blue'}:{icon:typeof Lightning;tone?:string}){
  return <span className={`accent-icon tone-${tone}`} aria-hidden="true"><Icon size={19} weight="fill"/></span>;
