@@ -239,9 +239,8 @@ function MedicalRecordBlock(){
 // Public preview link contains no profile fields, documents or authorization credentials.
 const INVITE_PREVIEW_TOKEN='whoof-preview';
 function invitationUrl(){
- const url=new URL(window.location.origin);
- // Local demo: camera-scanned localhost URLs must resolve to the host Mac.
- if(['localhost','127.0.0.1','[::1]'].includes(url.hostname))url.hostname='192.168.1.179';
+ // To scan the QR from a phone on local Wi-Fi, open the preview by the Mac's LAN address, not localhost.
+ const url=new URL(import.meta.env.BASE_URL,window.location.origin);
  url.searchParams.set('invite',INVITE_PREVIEW_TOKEN);
  return url.toString();
 }

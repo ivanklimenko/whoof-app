@@ -1,11 +1,11 @@
 import {chromium,expect} from '@playwright/test';
-const browser=await chromium.launch({headless:true,executablePath:'/Users/leshaisanov/Library/Caches/ms-playwright/chromium_headless_shell-1234/chrome-headless-shell-mac-arm64/chrome-headless-shell'});
+const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true});page.setDefaultTimeout(10000);
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
 const screen=page.getByTestId('native-app');
 async function snap(name){await page.mouse.move(30,30);await page.waitForTimeout(550);await screen.screenshot({path:`qa/v1-${name}.png`});}
 async function nav(name){await page.getByRole('navigation').getByRole('button',{name,exact:true}).click();}
-await page.goto('http://192.168.1.179:4178/');await expect(page.getByRole('heading',{name:'Карта дня'})).toBeVisible();
+await page.goto(process.env.QA_URL??'http://localhost:4178/');await expect(page.getByRole('heading',{name:'Карта дня'})).toBeVisible();
 const box=await screen.boundingBox();if(Math.abs(box.width-390)>1||Math.abs(box.height-844)>1)throw Error('Native viewport mismatch');
 await snap('home');
 await page.locator('.mobile-scroll').first().evaluate(el=>el.scrollTop=390);await snap('totals');

@@ -3,7 +3,7 @@
 Standalone snapshot of design_v1, 24 September 2026. No simulated phone frame.
 
 Mac: http://localhost:4178/
-Current Wi-Fi: http://192.168.1.179:4178/
+Wi-Fi: http://<Mac LAN IP>:4178/
 Original simulator: http://localhost:4177/
 
 Run: npm run dev -- --host 0.0.0.0 --port 4178 --strictPort
