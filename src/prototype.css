@@ -12,51 +12,32 @@
 .home-header{margin-bottom:20px}.activity-explorer{margin-top:23px}.date-navigation{margin-bottom:12px}.day-timeline{height:177px}.day-summary-label{margin-top:15px}.day-card{padding:12px 11px}.day-total{font-size:22px;margin:11px 0 10px}.day-card p{margin-top:9px;line-height:1.4}.timeline-hint{margin-top:7px!important}
 
 /* Weather-style time exploration: fixed pointer, draggable time scale. */
-.time-explorer{margin-top:15px;padding:15px 0 0;border-bottom:1px solid #edf0f2}
-.time-readout{display:flex;align-items:center;justify-content:space-between;text-align:center;gap:12px}
-.time-readout>div{display:flex;flex-direction:column;gap:5px}
-.time-readout strong{font-size:20px;letter-spacing:-.5px;font-weight:650;font-variant-numeric:tabular-nums}
-.time-readout span{font-size:12px;color:#858d98}
-.time-readout button{display:grid;place-items:center;width:40px;height:44px;border:0;background:none;color:#515b65;border-radius:50%}
-.time-readout button:disabled{opacity:.25}
-.time-ruler{position:relative;margin-top:15px;--ruler-gutter:167.5px;outline-offset:4px;border-radius:8px}
-.ruler-pointer{position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:2;pointer-events:none;color:#252c34}
-.ruler-rail{cursor:grab;mask-image:linear-gradient(to right,transparent,#000 10%,#000 90%,transparent)}
-.ruler-ticks{padding:14px var(--ruler-gutter) 0;box-sizing:content-box;gap:0}
-.ruler-tick{flex:0 0 20px;width:20px;height:55px;position:relative;display:flex;justify-content:center;align-items:flex-start;background:none;border:0;padding:0;color:#aeb5bd}
-.ruler-tick i{width:2px;height:20px;border-radius:2px;background:currentColor;display:block;margin-top:5px}
-.ruler-tick.hour-tick{color:#6e7883}
-.ruler-tick.hour-tick i{height:30px;margin-top:0}
-.ruler-tick[aria-pressed=true]{color:#242b32}
-.ruler-tick span{position:absolute;top:37px;left:50%;transform:translateX(-50%);font-size:10px;font-variant-numeric:tabular-nums;color:#818a95}
-.ruler-hint{font-size:10px!important;color:#9199a3!important;text-align:center;margin:6px 0 17px!important}
-.time-explorer .interval-metrics{background:#f6f7f8;border-radius:14px;padding:12px 15px;margin-top:0;border:0}
-.time-explorer .interval-note{margin:8px 0 13px;text-align:center}
 
-.activity-explorer .day-timeline{height:145px}
-.time-explorer{margin-top:8px;padding-top:0}
-.time-ruler{margin-top:10px}
-.time-explorer .interval-metrics{padding:10px 15px}
 
-/* Metrics: compact, individually tappable tiles. */
-.metric-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:19px}
-.metric-tile{min-width:0;display:flex;flex-direction:column;align-items:stretch;text-align:left;padding:15px 13px 12px;background:#f6f7f8;border:1px solid #eceef0;border-radius:19px;color:var(--ink);transition:background-color 150ms ease,transform 150ms ease}
-.metric-tile:active{transform:scale(.96);background:#eef0f2}
+/* Metrics: shared period, quiet tiles with values anchored at the bottom. */
+.whoof-app .metrics-intro{font-size:16px;margin:10px 0 22px!important;line-height:1.4}
+.metrics-period{margin:0 0 12px}
+.metrics-period button{min-height:40px}
+.whoof-app .metrics-date{font-size:12px;line-height:1.4;color:#858b96;margin:0 0 18px}
+.metric-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.metric-tile{min-width:0;min-height:188px;display:flex;flex-direction:column;align-items:stretch;text-align:left;padding:16px 13px;background:#f6f7f8;border:1px solid #eceef0;border-radius:19px;transition:background-color 150ms ease,transform 150ms ease}
+.whoof-app .metric-tile:active{transform:scale(.96);background:#eef0f2}
 .metric-tile:focus-visible{outline:2px solid #626d78;outline-offset:3px}
 .metric-tile-heading{display:grid;grid-template-columns:18px 1fr 12px;align-items:start;gap:7px;min-height:34px;color:#697582}
 .metric-tile-heading>span{font-size:12px;line-height:16px;font-weight:500}
 .metric-tile-heading>svg:last-child{margin-top:2px;color:#a0a7af}
-.metric-tile-value{display:flex;align-items:baseline;gap:4px;margin-top:8px;min-height:34px;flex-wrap:wrap}
-.metric-tile-value strong{font-size:25px;letter-spacing:-1px;line-height:1.15;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap;color:#282e35}
-.metric-tile-value>span{font-size:10px;color:#89919b;white-space:nowrap}
-.metric-tile-chart{height:46px;width:100%;margin-top:4px}
-.metric-tile p{font-size:10px;line-height:14px;min-height:28px;color:#89919b;margin:5px 0 0;text-wrap:pretty}
-.metric-tile-wide{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;column-gap:18px;padding:16px}
-.metric-tile-wide .metric-tile-heading{grid-column:1/-1;min-height:20px;grid-template-columns:18px 1fr 12px}
-.metric-tile-wide .metric-tile-value{grid-column:1;grid-row:2}
-.metric-tile-wide .metric-tile-chart{grid-column:2;grid-row:2/4;height:57px;align-self:center}
-.metric-tile-wide p{grid-column:1;grid-row:3;min-height:0}
+.metric-tile-bottom{margin-top:auto;padding-top:24px}
+.metric-tile-value{display:flex;align-items:baseline;gap:4px;flex-wrap:wrap}
+.metric-tile-value strong{font-size:34px;letter-spacing:-1.2px;line-height:1.1;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap;color:#282e35}
+.metric-tile-value .metric-duration{display:flex;gap:7px;font-size:32px}
+.metric-duration small{font-size:14px;font-weight:500;letter-spacing:-.2px}
+.metric-tile-value>span{font-size:11px;color:#89919b;white-space:nowrap}
+.whoof-app .metric-tile p{font-size:11px;line-height:16px;min-height:32px;color:#89919b;margin:10px 0 0;text-wrap:pretty}
+.metric-tile-wide{grid-column:1/-1;min-height:166px}
+.metric-tile-wide .metric-tile-heading{min-height:18px}
+.metric-tile-wide p{min-height:16px}
 @media(prefers-reduced-motion:reduce){.metric-tile{transition:none}}
+
 
 /* Pet medical records: local document library and preview. */
 .medical-profile-card{display:flex;align-items:center;gap:13px;width:100%;padding:18px 15px;margin:22px 0 8px;background:#f6f7f8;border:1px solid #e9ecef;border-radius:18px;text-align:left}
@@ -95,7 +76,7 @@
 
 /* Day map header: title left, calendar date right. */
 .date-navigation{gap:14px;min-height:44px}
-.date-navigation .day-map-title{font-size:22px;letter-spacing:-.6px;line-height:1.2;white-space:nowrap}
+.date-navigation .day-map-title,.day-summary-label h2{font-size:22px;letter-spacing:-.6px;line-height:1.2;white-space:nowrap}
 .date-navigation .date-trigger{margin-left:auto;min-height:44px;gap:7px;text-align:right;font-size:14px;font-weight:500;letter-spacing:-.2px;white-space:nowrap}
 .date-navigation .date-trigger>svg{margin-top:0;color:#858e98}
 
@@ -122,3 +103,387 @@
 .day-insight-detail .primary{min-height:49px;font-size:14px!important}
 
 .freshness:has(>span:only-child){justify-content:flex-end}
+
+/* One day chart, one explicit time control, and contextual period details. */
+.activity-explorer .day-timeline{height:158px;touch-action:auto}
+.insight-marker-layer{inset:24px 12px 4px}
+.day-slider{margin-top:0}
+.day-slider-control{height:78px;position:relative;padding-top:34px}
+.day-slider-track{position:absolute;top:53px;left:12px;right:12px;height:6px;background:#e0e1e4;border-radius:4px;overflow:hidden}
+.day-slider-track>span{display:block;height:100%;background:#303235}
+.day-slider-time{position:absolute;top:7px;transform:translateX(-50%);background:#303235;color:white;border-radius:12px;font-size:13px;font-weight:500;line-height:25px;padding:0 9px;font-variant-numeric:tabular-nums;pointer-events:none}
+.day-slider-time{max-width:64px}
+.day-slider-control input{appearance:none;-webkit-appearance:none;display:block;height:44px;margin:0;padding:0;background:transparent;position:relative;touch-action:none;cursor:ew-resize;border:0;border-radius:10px}
+.day-slider-control input::-webkit-slider-runnable-track{height:6px;background:transparent}
+.day-slider-control input::-moz-range-track{height:6px;background:transparent}
+.day-slider-control input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:24px;height:24px;border:2px solid white;border-radius:50%;background:#303235;box-shadow:0 1px 4px #0002;margin-top:-9px}
+.day-slider-control input::-moz-range-thumb{width:20px;height:20px;border:2px solid white;border-radius:50%;background:#303235;box-shadow:0 1px 4px #0002}
+.day-slider-control input:focus-visible{outline:2px solid #838891;outline-offset:3px}
+.day-slider-hours{display:flex;justify-content:space-between;font-size:10px;color:#747981;font-variant-numeric:tabular-nums}
+.whoof-app .day-slider-hint{font-size:10px;color:#91959e;text-align:center;margin:15px 0 23px}
+.whoof-app .moment-caption{color:#858993;font-size:12px;margin:0 0 10px}
+.moment-values{margin:0;font-variant-numeric:tabular-nums}
+.moment-values>div{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:43px;padding:8px 12px;border-bottom:1px solid #e4e6e9;font-size:14px}
+.moment-values dt{font-weight:400}.moment-values dd{margin:0;text-align:right;white-space:nowrap;font-weight:400}
+.moment-insight{display:flex;align-items:center;gap:12px;width:100%;min-height:49px;padding:8px 12px;border:0;background:none;color:#303235;font-size:14px;text-align:left}
+.moment-insight span{flex:1}.moment-insight>svg:last-child{color:#858993}
+
+/* Peer sections: shared headings, generous separation, compact internal rhythm. */
+.activity-explorer .day-summary{margin-top:40px}
+.day-summary .day-summary-label{min-height:28px;margin:0 0 16px;gap:12px;align-items:baseline}
+.day-summary .day-summary-label>span{font-size:12px;line-height:1.4;white-space:nowrap}
+.day-summary .day-cards{gap:12px}
+.day-summary .day-card{padding:16px 12px}
+.day-summary .day-card-title{font-size:12px}
+.day-summary .day-total{font-size:24px;margin:14px 0 12px;letter-spacing:-.8px}
+.day-summary .day-card p{font-size:11px;line-height:1.5;margin-top:12px}
+.day-summary .freshness{font-size:10px;margin-top:12px}
+
+/* Settings is the parent destination; pet health lives in its own profile. */
+.settings-content{background:#f6f7f8}
+.settings-content .page-top{margin-bottom:22px}
+.settings-group{background:white;border-radius:20px;padding:0 15px;margin-bottom:20px}
+.settings-entry{display:flex;align-items:center;gap:12px;width:100%;min-height:58px;padding:14px 0;border:0;border-bottom:1px solid #e8eaed;background:none;text-align:left;font-size:14px!important;line-height:1.35}
+.settings-entry:last-child{border-bottom:0}
+.settings-entry>svg{flex-shrink:0;color:#9298a0}
+.settings-entry>span:not(.device-entry-icon){flex:1;min-width:0}
+.settings-entry>small{font-size:12px;color:#9298a0;white-space:nowrap}
+.settings-entry strong{display:block;font-size:14px;font-weight:550}
+.settings-entry span small{display:block;font-size:11px;color:#89919b;margin-top:5px;line-height:1.4}
+.settings-destinations .settings-entry{min-height:80px}
+.settings-entry img{width:43px;height:43px;object-fit:cover;border-radius:50%;filter:grayscale(1)}
+.device-entry-icon{width:43px;height:43px;background:#f3f4f6;border-radius:14px;display:grid;place-items:center;flex-shrink:0;color:#727b86}
+.profile-page-header{display:flex;align-items:center;gap:8px;min-height:48px;margin-left:-10px}
+.profile-page-header h1{font-size:24px;font-weight:700;letter-spacing:-.7px;line-height:1.2}
+.settings-copy{font-size:14px;line-height:1.6;color:#737d89}
+.settings-copy p{margin:0 0 20px}
+.settings-faq details{border-bottom:1px solid #e6e8eb;padding:16px 0}
+.settings-faq summary{font-size:14px;line-height:1.5;cursor:pointer;font-weight:500}
+.settings-faq p{font-size:13px;line-height:1.6;color:#7b8590;margin:12px 0 0}
+
+.pet-form textarea{display:block;width:100%;margin-top:7px;padding:13px;background:#f4f5f6;border:1px solid #e7e8eb;border-radius:11px;color:#282e35;font:inherit;font-size:15px;line-height:1.5;resize:vertical;outline:none}
+.pet-form textarea:focus{border-color:#89919c}
+.pet-form textarea::placeholder{color:#929aa4}
+.profile-data .chronic-row{flex-direction:column;align-items:stretch;gap:8px}
+.profile-data .chronic-row strong{text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.5}
+
+/* Owner invitation: one scan, clear shared scope, explicit acceptance. */
+.access-intro{margin:24px 0 20px}
+.whoof-app .access-intro h2{font-size:25px;letter-spacing:-.7px;margin-bottom:10px}
+.whoof-app .access-intro p{font-size:14px;line-height:1.5;color:#858b96}
+.invite-qr-card{padding:18px 16px 20px;background:#f6f7f8;border-radius:22px;text-align:center}
+.invite-pet{display:flex;align-items:center;justify-content:center;gap:8px;font-size:14px;font-weight:550;margin-bottom:12px}
+.invite-pet img{height:28px;width:28px;object-fit:cover;border-radius:50%;filter:grayscale(1)}
+.invite-qr{display:block;width:220px;height:220px;max-width:100%;object-fit:contain;margin:0 auto;border-radius:14px}
+.invite-qr-loading{height:220px;display:grid;place-items:center;color:#858b96;font-size:13px}
+.whoof-app .invite-qr-card p{font-size:12px;line-height:1.5;color:#858b96;margin-top:14px}
+.invite-share{margin-top:18px}
+.invite-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:8px 0 24px}
+.invite-actions .text-button{min-height:44px;text-decoration:none}
+.access-scope h2{font-size:18px}
+.shared-data-list{margin:14px 0 20px}
+.shared-data-list>div{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid #e7e9ec}
+.shared-data-list>div>svg{color:#858d98;flex-shrink:0}
+.shared-data-list>div>span{flex:1}.shared-data-list strong{font-size:13px;font-weight:550;display:block}.shared-data-list small{display:block;font-size:11px;line-height:1.4;color:#8b929c;margin-top:5px}
+.whoof-app .access-scope>p,.whoof-app .access-private{font-size:12px;color:#858b96;line-height:1.5;margin:0 0 16px}
+.whoof-app .invite-demo-note{font-size:10px;line-height:1.55;color:#929aa4;margin:18px 0 0}
+.whoof-app .invite-feedback{font-size:12px;line-height:1.4;margin:0 0 12px;color:#637080}
+.invite-link-input{width:100%;padding:12px;background:#f5f6f8;border:1px solid #e6e8eb;border-radius:12px;font-size:12px;margin-bottom:20px}
+.invite-content{padding-bottom:60px}
+.invite-header{display:flex;align-items:center;gap:12px;margin-left:-10px;font-size:12px;color:#858b96;min-height:44px}
+.join-pet{text-align:center;margin:24px 0}
+.join-avatar{position:relative;width:86px;margin:0 auto 24px}.join-avatar>img{width:86px;height:86px;border-radius:50%;object-fit:cover;filter:grayscale(1)}
+.join-avatar>span{position:absolute;right:-4px;bottom:0;background:#2c3239;color:white;border:3px solid white;border-radius:50%;width:31px;height:31px;display:grid;place-items:center}
+.join-pet h1{font-size:30px;line-height:1.1;letter-spacing:-1px;font-weight:700;text-wrap:balance;margin:10px 0 12px}
+.whoof-app .join-pet>p:not(.eyebrow){font-size:12px;line-height:1.5;color:#858b96;margin:0 0 22px}
+.whoof-app .join-explanation{font-size:14px;line-height:1.5;color:#7b8592;margin:28px 0 0}
+.join-accept{margin-top:25px}.join-decline{display:flex;justify-content:center;width:100%;margin-top:8px;min-height:44px}
+.invite-success-copy{border-radius:18px;padding:18px;background:#f6f7f8;margin:30px 0}
+.invite-success-copy h2{font-size:16px}.whoof-app .invite-success-copy p{font-size:13px;color:#858b96;line-height:1.5;margin-top:10px}
+.access-member{text-align:center;margin:30px 0}.access-member>svg{margin-bottom:16px}.whoof-app .access-member p{color:#858b96;font-size:13px;margin-top:10px}
+.access-member~.secondary{margin-top:22px}
+
+.pet-photo-button{position:relative;display:block;width:92px;height:92px;padding:0;margin:0 auto;border:0;background:none;border-radius:50%;flex-shrink:0}
+.pet-photo-button>img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.pet-photo-button>span{position:absolute;right:-3px;bottom:0;display:grid;place-items:center;width:30px;height:30px;border:3px solid white;border-radius:50%;background:#eef0f2;color:#535d69}
+.profile-hero .photo-change-label{display:flex;justify-content:center;margin:5px auto 14px;font-size:11px!important}
+.pet-form-photo{display:flex;align-items:center;gap:15px;margin:8px 0 24px}
+.pet-form-photo .pet-photo-button{margin:0;width:72px;height:72px}
+.whoof-app .photo-error,.sheet-body .photo-error{font-size:12px;color:#555e6a;line-height:1.5;margin:10px 0 16px}
+
+/* design_v1 / Fuse: observed reference values and Whoof component adaptation.
+   Reference mapping: references/fuse/ui-mapping.md. Runtime files are unchanged. */
+.whoof-app,.sheet-body{
+ --ink:#080808;--muted:#747474;--faint:#a8a8a8;--line:#efefef;--soft:#fafafa;
+ --blue:#4a80f5;--purple:#9863ed;--green:#2bbb65;
+ --card-border:1px solid #f0f0f0;
+ --card-shadow:0 1px 3px #00000002,inset 0 1px 2px #00000001;
+ color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+ font-size:14px;letter-spacing:-.15px;-webkit-font-smoothing:antialiased;
+}
+.whoof-content,.home-content{padding:68px 24px 136px;background:#fff}
+.whoof-app button,.sheet-body button{transition:transform 140ms ease,background-color 140ms ease,opacity 140ms ease}
+.whoof-app button:active:not(:disabled),.sheet-body button:active:not(:disabled){transform:scale(.96)}
+.whoof-app button:focus-visible,.sheet-body button:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.whoof-app h2{font-size:19px;font-weight:650;line-height:1.25;letter-spacing:-.45px}
+.whoof-app h1,.whoof-app h2,.sheet-body h2{text-wrap:balance}
+.whoof-app p{line-height:1.5}
+.whoof-app .intro,.sheet-body .intro{color:var(--muted);font-size:14px;line-height:1.5;letter-spacing:-.15px}
+.whoof-app .muted,.sheet-body .muted{color:var(--muted)}
+.whoof-app .eyebrow{font-size:11px;letter-spacing:0;font-weight:500;text-transform:none;color:var(--muted);margin-bottom:6px!important}
+.page-top{min-height:54px;margin:0}
+.page-top h1{font-size:24px;font-weight:650;line-height:1.15;letter-spacing:-.75px}
+.page-top>.accent-icon{width:32px;height:32px}
+.primary,.secondary{min-height:48px;border-radius:999px;font-size:13px!important;font-weight:600!important;letter-spacing:-.15px}
+.primary{background:#080808;color:white!important;border-color:#080808;box-shadow:0 3px 8px #00000005}
+.secondary{background:#f7f7f7;color:#111!important;border-color:#f0f0f0}
+.icon-button{background:#fafafa;color:#111;box-shadow:0 2px 12px #00000003}
+.text-button{font-size:12px!important;min-height:44px;color:#686868!important}
+.toggle.on{background:#32bd68}
+.toggle{background:#e5e5e5}
+.whoof-app .footnote,.sheet-body .footnote{color:var(--muted)}
+
+/* Shared icon surfaces. Real Phosphor symbols, gradient UI backgrounds. */
+.accent-icon{--icon-top:#92aeff;--icon-mid:#6190ff;--icon-bottom:#3974f7;display:inline-grid;place-items:center;width:32px;height:32px;flex:0 0 32px;border-radius:10px;color:#fff;background:linear-gradient(140deg,var(--icon-top),var(--icon-mid) 52%,var(--icon-bottom));box-shadow:inset 0 1px 3px #ffffff90,inset 0 -1px 3px #ffffff55,0 1px 2px #00000004}
+.accent-icon svg{width:19px;height:19px;filter:drop-shadow(0 1px 1px #00000012)}
+.tone-purple{--icon-top:#caa3ff;--icon-mid:#ae7aef;--icon-bottom:#874aeb}
+.tone-coral{--icon-top:#ffa69c;--icon-mid:#f8797c;--icon-bottom:#ef575f}
+.tone-cyan{--icon-top:#a2ebf9;--icon-mid:#68d7ed;--icon-bottom:#32b8dc}
+.tone-orange{--icon-top:#ffbc96;--icon-mid:#ff9a63;--icon-bottom:#fa7843}
+.tone-green{--icon-top:#a1eaaa;--icon-mid:#6dd685;--icon-bottom:#3cbe67}
+.tone-pink{--icon-top:#f2a3f8;--icon-mid:#e779f0;--icon-bottom:#c94be2}
+.tone-dark{--icon-top:#555;--icon-mid:#292929;--icon-bottom:#111}
+
+/* Compact header and two-tone display hierarchy, as in Fuse's balances. */
+.brand-header{height:44px}
+.home-header{margin-bottom:32px}
+.home-header .pet-picker{gap:9px;min-height:44px}
+.home-header .pet-picker img{width:32px;height:32px;filter:none;outline:1px solid #00000008}
+.home-header .pet-picker>span{font-size:16px;font-weight:600;letter-spacing:-.35px}
+.home-header .pet-picker>svg{width:13px;color:#aaa}
+.notification-button{width:40px;height:40px;border:0!important;background:#fbfbfb;box-shadow:0 1px 10px #00000004}
+.notification-button svg{width:21px;height:21px}
+.notification-button>i{width:5px;height:5px;right:9px;top:8px;background:#4a80f5}
+.wellbeing h1{font-size:32px;font-weight:700;line-height:1.06;letter-spacing:-1.2px;margin:0}
+.wellbeing h1 span{color:#999;font-weight:650}
+.wellbeing>p{font-size:14px;line-height:1.45;letter-spacing:-.2px;color:#747474;margin-top:12px;max-width:285px;text-wrap:pretty}
+
+/* A single chart, softly drawn. No duplicate timeline or categorical axis. */
+.activity-explorer{margin-top:36px}
+.date-navigation{gap:12px;min-height:40px;margin-bottom:15px}
+.date-navigation .day-map-title,.day-summary-label h2{font-size:19px;font-weight:650;letter-spacing:-.4px;line-height:1.25}
+.date-navigation .date-trigger{font-size:12px;font-weight:500;gap:5px;min-height:40px;color:#747474}
+.date-navigation .date-trigger>svg{width:12px;color:#a7a7a7}
+.day-timeline{height:142px}
+.insight-marker>span{background:linear-gradient(145deg,#b5cef7,#83a5e3);color:#294976;box-shadow:0 0 0 1px #e2ebfa,0 3px 8px #597fb820;width:23px;height:23px;border:2px solid white}
+.insight-marker.is-selected>span{box-shadow:0 0 0 3px #dce7f9}
+.day-slider-time{font-size:11px;font-weight:500;background:#0c0c0c;color:white;border-radius:99px;padding:5px 9px;line-height:1.2;box-shadow:0 2px 5px #00000006}
+.day-slider-track{height:4px;background:#eeeeef}
+.day-slider-track>span{background:#121212}
+.day-slider-control input::-webkit-slider-thumb{background:#080808;width:24px;height:24px;border:3px solid white;box-shadow:0 3px 10px #0000001a}
+.day-slider-control input::-moz-range-thumb{background:#080808;border:3px solid white;box-shadow:0 3px 10px #0000001a}
+.day-slider-hours{font-size:10px;color:#888}
+.whoof-app .day-slider-hint{font-size:10px;margin:13px 0 24px;color:#808080}
+.whoof-app .moment-caption{font-size:11px;margin:0 0 6px;color:#848484}
+.moment-values>div{padding:9px 0;min-height:39px;font-size:13px;border-color:#f0f0f0}
+.moment-values dt{color:#747474}.moment-values dd{color:#141414}
+.moment-insight{min-height:46px;padding:8px 0;font-size:13px;gap:9px}
+.moment-insight>svg:first-child{color:#7496cf;width:19px;height:19px}
+.moment-insight>svg:last-child{color:#bbb;width:14px}
+.activity-explorer .day-summary{margin-top:36px}
+.day-summary .day-summary-label{margin-bottom:15px;min-height:24px}
+.day-summary .day-summary-label>span{font-size:11px;color:#8b8b8b}
+.day-summary .day-cards{gap:10px}
+.day-summary .day-card{border:var(--card-border);border-radius:23px;padding:16px;background:#fdfdfd;box-shadow:var(--card-shadow)}
+.day-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.day-card-top>svg{color:#c2c2c2}
+.day-summary .day-card-title{font-size:12px;font-weight:400;color:#747474}
+.day-summary .day-total{margin:6px 0 12px;white-space:nowrap;font-size:24px;font-weight:650;letter-spacing:-.9px}
+.day-total strong{font:inherit}.day-total .metric-duration{display:flex;gap:5px}
+.day-total small{font-size:12px;color:#9a9a9a;font-weight:500;letter-spacing:-.15px}
+.intensity-bar{height:4px;gap:2px;border-radius:4px}
+.day-summary .day-card p{font-size:10px;line-height:1.5;color:#828282;margin-top:10px}
+.day-card p b{font-weight:500;color:#595959}
+
+/* Fuse-style floating dock: filled symbols and one independent black action. */
+.bottom-nav{left:20px;right:20px;bottom:calc(var(--mobile-safe-area-height,34px) + 10px);gap:12px;align-items:center}
+.nav-capsule,.ai-nav{height:58px;background:#ffffffeb;border:0;box-shadow:0 5px 22px #00000007,0 0 3px #00000003;border-radius:99px;backdrop-filter:blur(20px)}
+.nav-capsule{padding:4px 6px}
+.nav-capsule>button{color:#aeaeae;font-size:9px;font-weight:500;gap:3px;line-height:12px}
+.nav-capsule>button svg{width:22px;height:22px}
+.nav-capsule>button.selected{color:#080808}
+.ai-nav{height:54px;width:54px;background:#080808;box-shadow:0 8px 24px #0000001c;color:#fff!important;gap:0;font-size:8px!important}
+.ai-nav svg{color:white;width:23px;height:23px}
+.ai-nav>span{font-size:8px;line-height:10px;color:#ddd}
+
+/* Data cards: reference icon / open space / name + value + quiet caption. */
+.whoof-app .metrics-intro{font-size:13px;margin:10px 0 22px!important;color:#747474}
+.segment{padding:3px;margin:18px 0;background:#fafafa;border:1px solid #f4f4f4;border-radius:99px;gap:3px}
+.segment button{min-height:38px;border-radius:99px;color:#888;font-size:12px}
+.segment button.active{background:#fff;color:#080808;font-weight:600;box-shadow:0 1px 7px #00000005}
+.metrics-period{margin:0 0 12px}
+.whoof-app .metrics-date{font-size:11px;color:#858585;margin-bottom:18px}
+.metric-tiles{gap:10px}
+.metric-tile{min-height:196px;padding:16px;background:#fdfdfd;border:var(--card-border);border-radius:23px;box-shadow:var(--card-shadow)}
+.whoof-app .metric-tile:active{background:#f8f8f8}
+.metric-tile-heading{display:flex;justify-content:space-between;align-items:center;min-height:32px}
+.metric-tile-heading>svg:last-child{width:12px;color:#c1c1c1;margin:0}
+.metric-tile-bottom{padding-top:24px}
+.metric-tile-bottom h2{font-size:12px;color:#747474;font-weight:400;letter-spacing:-.1px;line-height:1.3;margin:0 0 8px;text-wrap:initial}
+.metric-tile-value{gap:3px;align-items:baseline}
+.metric-tile-value strong{font-size:34px;line-height:1.05;font-weight:650;letter-spacing:-1.35px;color:#080808}
+.metric-tile-value .metric-duration{font-size:28px;gap:5px}
+.metric-duration small{font-size:12px;color:#a0a0a0;font-weight:500}
+.metric-tile-value>span{font-size:10px;color:#949494}
+.whoof-app .metric-tile p{font-size:10px;line-height:14px;min-height:28px;margin-top:10px;color:#838383}
+.metric-tile-wide{min-height:128px;display:grid;grid-template-columns:40px 1fr;gap:10px}
+.metric-tile-wide .metric-tile-heading{align-items:start;position:relative}
+.metric-tile-wide .metric-tile-heading>svg:last-child{display:none}
+.metric-tile-wide .metric-tile-bottom{padding-top:0}
+.metric-tile-wide p{min-height:14px}
+
+/* Settings: white grouped lists, colored icons, black shared-care entry. */
+.settings-content{background:white}
+.settings-content .page-top{margin:0 0 22px;min-height:44px}
+.settings-content .page-top h1{font-size:20px;letter-spacing:-.5px}
+.settings-invite-banner{display:flex;align-items:center;gap:12px;width:100%;padding:14px 16px;min-height:66px;margin:0 0 24px;background:linear-gradient(115deg,#353535,#080808 45%,#000);border:0;border-radius:22px;text-align:left;color:white!important}
+.settings-invite-banner>.accent-icon{box-shadow:none;background:none;flex-basis:26px;width:26px}
+.settings-invite-banner .accent-icon svg{width:25px;height:25px}
+.settings-invite-banner>span:nth-child(2){flex:1;min-width:0}
+.settings-invite-banner strong{display:block;font-size:13px;font-weight:550;letter-spacing:-.1px}
+.settings-invite-banner small{display:block;font-size:11px;color:#a4a4a4;line-height:1.3;margin-top:4px}
+.settings-invite-banner>svg{background:#343434;box-sizing:content-box;padding:6px;border-radius:50%;width:11px;height:11px;color:#ddd}
+.whoof-app .settings-section-label{font-size:11px;font-weight:400;color:#929292;letter-spacing:0;margin:0 0 7px;line-height:1.5}
+.settings-group{padding:0;margin:0 0 26px;border-radius:0;background:transparent}
+.settings-entry{gap:12px;min-height:53px;padding:11px 0;border:0;font-size:13px!important;letter-spacing:-.2px}
+.settings-entry strong{font-size:13px;font-weight:500}
+.settings-entry>svg:last-child{width:13px;height:13px;color:#bababa}
+.settings-entry>.accent-icon{width:24px;height:24px;flex:0 0 24px;border-radius:8px}
+.settings-entry>.accent-icon svg{width:16px;height:16px}
+.settings-entry>span.accent-icon{flex:0 0 24px}
+.settings-entry>small{font-size:11px;color:#949494}
+.settings-entry span small{font-size:11px;color:#838383;margin-top:4px}
+.settings-destinations .settings-entry{min-height:68px}
+.settings-entry img{width:34px;height:34px;filter:none;outline:1px solid #00000008}
+.settings-destinations .accent-icon{width:34px;height:34px;flex-basis:34px;border-radius:11px}
+.settings-destinations .accent-icon svg{width:21px;height:21px}
+
+/* Profile, documents and device details share the same light surfaces. */
+.profile-page-header{margin-left:-8px;gap:8px;min-height:44px}
+.profile-page-header .icon-button{width:36px;height:36px}
+.profile-page-header h1{font-size:20px;font-weight:650;letter-spacing:-.45px}
+.profile-hero{margin:30px 0 28px}
+.profile-hero h2{font-size:26px;font-weight:650;letter-spacing:-.8px}
+.profile-hero>p{color:#858585;font-size:12px}
+.pet-photo-button{width:80px;height:80px}
+.pet-photo-button>img{outline:1px solid #0000000d}
+.pet-photo-button>span{background:#fff;color:#747474;box-shadow:0 2px 10px #0000000a;border-width:2px;right:-4px}
+.profile-hero .photo-change-label{margin:4px auto 10px;font-size:11px!important}
+.profile-data{border:1px solid #f1f1f1;border-radius:22px;padding:0 16px;background:#fdfdfd}
+.profile-data>div{padding:15px 0;border-color:#efefef;font-size:12px;gap:14px}
+.profile-data>div:last-child{border:0}
+.profile-data span{color:#7c7c7c}.profile-data strong{font-weight:500;color:#161616}
+.medical-profile-card{margin-top:16px;background:white;border:1px solid #f0f0f0;border-radius:22px;padding:16px;gap:12px}
+.medical-profile-icon{background:linear-gradient(145deg,#b3ecf7,#5ccbe1);color:white;width:36px;height:36px;border-radius:11px;box-shadow:inset 0 1px 3px #ffffff70}
+.medical-profile-icon svg{width:22px;height:22px}
+.medical-profile-card strong{font-size:14px;font-weight:550}
+.medical-profile-card small{font-size:11px;color:#888}
+.medical-profile-card>svg{width:14px;color:#bbb}
+.quiet-card,.insight-evidence,.record-panel,.invite-success-copy{background:#fafafa;border:1px solid #f1f1f1;border-radius:20px}
+.large-paw,.collar-icon,.insight-kind-icon{color:#7b58c5;background:#f4efff}
+.pet-form input,.pet-form textarea{background:#fafafa;border:1px solid #eee;border-radius:16px;padding:14px;font-size:14px;color:#111}
+.pet-form input:focus,.pet-form textarea:focus{border-color:#aaa}
+.pet-form>label{color:#747474;font-size:12px}
+.pet-form .settings-row{border-color:#efefef;font-size:13px!important}
+.settings-copy,.settings-faq p{color:#747474;font-size:13px}
+.medical-empty>span,.medical-file-icon{background:#f0f8fb;color:#62bdd4}
+.medical-file-row,.notification-row{border-color:#f1f1f1}
+.medical-remove{color:#c65d5d!important}
+
+/* Walk discovery retains its map; color locates the actionable markers. */
+.map-panel{border-radius:24px;border:1px solid #f0f0f0;height:300px}
+.dog-pin{background:#6592ee;border-width:3px;box-shadow:0 2px 8px #284b9b1f}
+.my-location{background:white;color:#4a80f5;border-color:#88adf8}
+.map-controls{border:0;box-shadow:0 3px 16px #00000009;border-radius:18px}
+.map-controls button{border-color:#f5f5f5}
+.sharing-row{font-size:11px!important;color:#7b7b7b!important;padding:15px 0}
+.section-heading h2{font-size:18px;font-weight:650}.section-heading>span{color:#929292}
+.nearby-row{border-color:#f0f0f0;gap:12px}
+.nearby-row .pet-icon{background:#f0f5ff;color:#729ae8;width:38px;height:38px}
+.nearby-row:nth-of-type(2n) .pet-icon{background:#f6f0ff;color:#aa7ede}
+.nearby-row strong{font-size:13px;font-weight:550}.nearby-row p,.nearby-row>span{color:#818181}
+.history-row{border-color:#f0f0f0}.walk-thumb{border-radius:18px}
+.walk-stats strong{font-size:29px;font-weight:650;color:#111}.walk-stats span{color:#898989}
+
+/* Assistant and sharing are visually part of the same product. */
+.ai-header strong{font-size:17px;font-weight:600;color:#111}
+.ai-header span{font-size:11px;color:#929292}
+.ai-header>.icon-button{background:white}
+.ai-header>svg{color:#a78bd4}
+.context-chip{background:#fafafa;color:#818181;border:1px solid #f2f2f2;border-radius:999px;padding:7px 10px;font-size:11px}
+.chat-welcome{margin-top:42px}
+.chat-welcome>.accent-icon{width:44px;height:44px;border-radius:15px;margin-bottom:20px;display:grid}
+.chat-welcome>.accent-icon svg{width:27px;height:27px}
+.chat-welcome h1{font-size:29px;letter-spacing:-1px;font-weight:650;line-height:1.13}
+.chat-welcome>p{font-size:13px;color:#808080;line-height:1.55;margin-top:13px}
+.suggestions{margin-top:25px}.suggestions>button{border-color:#f0f0f0;font-size:12px;min-height:50px}
+.suggestions svg{color:#b2b2b2;width:14px}
+.chat-composer{left:20px;right:20px;min-height:54px;background:#fff;border:1px solid #eee;border-radius:99px;padding-left:17px;box-shadow:0 3px 20px #00000005}
+.chat-composer input{font-size:13px;color:#111}.chat-composer button{background:#080808}
+.message.user{background:#f7f7f7;border-radius:20px 20px 5px 20px}
+.whoof-app .message p{color:#252525}
+.assistant-label{color:#9474c7}
+.toast{background:#0b0b0bed;border-radius:99px;font-size:12px;box-shadow:0 5px 18px #00000014}
+.invite-qr-card{background:#fdfdfd;border:1px solid #efefef;border-radius:25px}
+.invite-pet img,.join-avatar>img{filter:none}
+.whoof-app .access-intro h2{font-size:26px;letter-spacing:-.8px}
+.whoof-app .access-intro p,.whoof-app .join-explanation{color:#7b7b7b;font-size:13px}
+.whoof-app .invite-qr-card p{color:#858585;font-size:11px}
+.access-scope h2{font-size:18px}.shared-data-list>div{border-color:#f0f0f0}
+.shared-data-list>div>svg:first-child{color:#8b73bd}
+.shared-data-list>div>svg:last-child{color:#4fb87c}
+.shared-data-list small,.whoof-app .access-private,.whoof-app .access-scope>p{color:#838383}
+.whoof-app .invite-demo-note{color:#858585}
+.join-avatar>span{background:#41ba6b}
+.join-pet h1{font-size:29px;font-weight:650}
+.invite-link-input{background:#fafafa;border-color:#eee;border-radius:16px}
+
+/* App-owned sheet content; calibrated sheet/runtime geometry stays intact. */
+.sheet-body h2{font-size:23px;font-weight:650;letter-spacing:-.6px;color:#111}
+.sheet-close{background:#f7f7f7!important;color:#999}
+.metric-detail-value{font-size:42px;color:#080808;font-weight:650;letter-spacing:-1.5px}
+.metric-detail-value small{font-size:17px;color:#aaa}
+.chart-period{color:#8b8b8b}.breakdown-total{color:#080808}
+.breakdown-row{border-color:#f0f0f0}.breakdown-row small{color:#999}
+.calendar td>button.chosen{background:#080808;color:white}
+.calendar td>button.is-today{box-shadow:inset 0 0 0 1px #ddd}
+.calendar th{color:#999}.calendar td>button{color:#111}
+@media(prefers-reduced-motion:reduce){.whoof-app button,.sheet-body button{transition:none}}
+
+/* Comparison pass: preserve Fuse's rhythm with readable Russian labels. */
+.nav-capsule>button{font-size:10px;color:#878787}
+.nav-capsule>button svg{width:24px;height:24px}
+.nav-capsule>button>span{color:#737373}
+.nav-capsule>button.selected,.nav-capsule>button.selected>span{color:#080808}
+.metric-tile-bottom h2{font-size:13px}
+.settings-entry{font-size:14px!important}
+.settings-entry strong{font-size:14px}
+.whoof-app .settings-section-label,.whoof-app .metrics-date,.whoof-app .moment-caption{color:#767676}
+.whoof-app .metric-tile p,.day-summary .day-card p,.whoof-app .day-slider-hint{color:#767676}
+.activity-explorer .day-timeline{height:142px}
+
+/* Color accents: one shared AI treatment, blue activity, natural pet photo. */
+.whoof-app,.sheet-body{--ai-gradient:linear-gradient(135deg,#e6dcfa 0%,#d8d9f8 48%,#cbdff5 100%);--ai-elevation:inset 0 1px 2px #ffffff99,inset 0 -1px 2px #7184b00d,0 4px 14px #7986b514}
+.ai-nav,.primary.ai-primary,.chat-composer button{
+ background:var(--ai-gradient);border-color:transparent;color:#414d70!important;box-shadow:var(--ai-elevation);
+}
+.ai-nav>span{color:#414d70}
+.ai-nav svg,.ai-primary svg{filter:none;color:inherit}
+.chat-composer{border-color:#e9e2f5;box-shadow:0 3px 18px #7b54cf08}
+.chat-composer:focus-within{border-color:#c6adeb}
+.chat-composer button:disabled{opacity:.3;box-shadow:none}
+.home-header .pet-picker img{filter:none}
+.day-slider-track>span{background:linear-gradient(90deg,#91b2f8,#5d89e8)}
+.day-slider-time{background:#496fc1}
+.day-slider-control input::-webkit-slider-thumb{background:#5d89e8;box-shadow:0 2px 8px #5d89e830}
+.day-slider-control input::-moz-range-thumb{background:#5d89e8;box-shadow:0 2px 8px #5d89e830}

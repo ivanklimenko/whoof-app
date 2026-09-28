@@ -1,0 +1,47 @@
+/* Real-device shell: browser scrolling, keyboard and safe areas. No phone simulator. */
+html,body,#root{width:100%;height:100%;margin:0;min-width:0;background:#fff;overflow:hidden}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overscroll-behavior:none}
+.native-app-root{position:fixed;left:0;right:0;width:100%;overflow:hidden;background:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif}
+.native-app-root .whoof-app{max-width:640px;margin:0 auto}
+.native-page{background:white;--keyboard-height:0px;--mobile-safe-area-height:var(--native-safe-bottom,0px)}
+.native-app-root .whoof-app:has(.bottom-nav)>.native-page{bottom:calc(88px + var(--native-safe-bottom,0px))}
+.native-app-root .whoof-app:has(.chat-composer)>.native-page{bottom:calc(76px + var(--native-safe-bottom,0px))}
+.native-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;touch-action:pan-y;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;user-select:auto;scrollbar-width:none;transition:none}
+.native-scroll .mobile-scroll-content{transform:none;will-change:auto}
+.native-app-root .whoof-content{padding:calc(18px + env(safe-area-inset-top,0px)) 20px 24px;min-height:100%}
+.native-app-root .home-content{padding-left:19px;padding-right:19px}
+.native-app-root .bottom-nav{bottom:calc(10px + var(--native-safe-bottom,0px))!important}
+.native-app-root .nav-capsule{min-width:0}
+.native-app-root .nav-capsule>button{padding-left:2px;padding-right:2px}
+.native-app-root .ai-nav{flex-shrink:0}
+.native-app-root .chat-composer{bottom:calc(10px + var(--native-safe-bottom,0px))!important}
+.native-app-root .native-carousel{touch-action:auto;overscroll-behavior-x:contain;overscroll-behavior-y:auto;cursor:auto;-webkit-overflow-scrolling:touch}
+.native-app-root .mobile-carousel-content{transform:none;will-change:auto}
+.native-app-root .ruler-rail{cursor:auto}
+.native-app-root button,.native-app-root a{touch-action:manipulation}
+.native-app-root input,.native-app-root textarea,.native-app-root .pet-form input,.native-app-root .chat-composer input{font-size:16px}
+.native-app-root .native-sheet-overlay{position:absolute;inset:0;background:rgb(0 0 0 / .35);z-index:40;touch-action:none}
+.native-app-root .native-sheet{position:absolute;bottom:0;left:0;right:0;width:100%;max-width:640px;margin:0 auto;z-index:41;touch-action:auto;min-height:0;border-radius:24px 24px 0 0;background:#fff;outline:none}
+.native-app-root .native-sheet .sheet-content{overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-bottom:calc(24px + var(--native-safe-bottom,0px))}
+.native-app-root .sheet-handle-zone{flex-shrink:0;touch-action:none}
+.native-app-root .sheet-header{flex-shrink:0}
+.native-app-root .sheet-title{padding-right:34px}
+.native-app-root .native-sheet[data-state=open]{animation:sheet-enter 170ms ease-out}
+.native-app-root .native-sheet-overlay[data-state=open]{animation:shade-enter 150ms ease-out}
+.native-app-root .pet-form input:focus{scroll-margin:20px}
+.native-app-root .day-card,.native-app-root .metric-tile{min-width:0}
+.native-app-root .insight-marker{touch-action:pan-y}
+.native-app-root .time-ruler{touch-action:auto}
+@media(max-width:350px){
+ .native-app-root .whoof-content{padding-left:16px;padding-right:16px}
+ .native-app-root .wellbeing h1{font-size:32px}
+ .native-app-root .date-navigation{gap:8px}.native-app-root .day-map-title{font-size:20px}.native-app-root .date-trigger{font-size:13px}
+ .native-app-root .metric-tile{padding:13px 10px}.native-app-root .metric-tile-value strong{font-size:22px}.native-app-root .metric-tile-heading{gap:5px;font-size:11px}
+ .native-app-root .day-total{font-size:20px}
+ .native-app-root .calendar td>button{width:34px}
+ .native-app-root .day-insight-detail h2{font-size:25px}
+}
+@keyframes sheet-enter{from{transform:translateY(24px);opacity:.4}to{transform:translateY(0);opacity:1}}
+@keyframes shade-enter{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.native-app-root .native-sheet[data-state=open],.native-app-root .native-sheet-overlay[data-state=open]{animation:none}}
