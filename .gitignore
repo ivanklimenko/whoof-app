@@ -1,0 +1,7 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+
+# Dependency link for this isolated local preview.
+node_modules
