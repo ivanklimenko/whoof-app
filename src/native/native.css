@@ -5,8 +5,8 @@ body{overscroll-behavior:none}
 .native-app-root{position:fixed;left:0;right:0;width:100%;overflow:hidden;background:#fff;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif}
 .native-app-root .whoof-app{max-width:640px;margin:0 auto}
 .native-page{background:white;--keyboard-height:0px;--mobile-safe-area-height:var(--native-safe-bottom,0px)}
-.native-app-root .whoof-app:has(.bottom-nav)>.native-page{bottom:calc(88px + var(--native-safe-bottom,0px))}
-.native-app-root .whoof-app:has(.chat-composer)>.native-page{bottom:calc(76px + var(--native-safe-bottom,0px))}
+.native-app-root .whoof-app:has(.bottom-nav)>.native-page{bottom:0}
+.native-app-root .whoof-app:has(.chat-composer)>.native-page{bottom:0}
 .native-scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;touch-action:pan-y;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;user-select:auto;scrollbar-width:none;transition:none}
 .native-scroll .mobile-scroll-content{transform:none;will-change:auto}
 .native-app-root .whoof-content{padding:calc(18px + env(safe-area-inset-top,0px)) 20px 24px;min-height:100%}
@@ -24,11 +24,18 @@ body{overscroll-behavior:none}
 .native-app-root .native-sheet-overlay{position:absolute;inset:0;background:rgb(0 0 0 / .35);z-index:40;touch-action:none}
 .native-app-root .native-sheet{position:absolute;bottom:0;left:0;right:0;width:100%;max-width:640px;margin:0 auto;z-index:41;touch-action:auto;min-height:0;border-radius:24px 24px 0 0;background:#fff;outline:none}
 .native-app-root .native-sheet .sheet-content{overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding-bottom:calc(24px + var(--native-safe-bottom,0px))}
-.native-app-root .sheet-handle-zone{flex-shrink:0;touch-action:none}
+.native-app-root .sheet-handle-zone{flex-shrink:0;height:44px;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.native-app-root .sheet-handle-zone:active{cursor:grabbing}
 .native-app-root .sheet-header{flex-shrink:0}
 .native-app-root .sheet-title{padding-right:34px}
-.native-app-root .native-sheet[data-state=open]{animation:sheet-enter 170ms ease-out}
-.native-app-root .native-sheet-overlay[data-state=open]{animation:shade-enter 150ms ease-out}
+/* Radix retains closed panels until these exit animations finish. */
+.native-app-root .native-sheet{transform:translate3d(0,var(--sheet-drag-y,0px),0);transition:transform 280ms cubic-bezier(.22,1,.36,1)}
+.native-app-root .native-sheet-overlay{opacity:var(--sheet-shade-opacity,1);transition:opacity 280ms cubic-bezier(.22,1,.36,1)}
+.native-app-root .native-sheet[data-state=open]:not([data-entered]){animation:native-sheet-enter 360ms cubic-bezier(.22,1,.36,1)}
+.native-app-root .native-sheet-overlay[data-state=open]:not([data-entered]){animation:native-shade-enter 360ms ease-out}
+.native-app-root .native-sheet[data-state=closed]{animation:native-sheet-exit 260ms cubic-bezier(.4,0,.8,.4) both;pointer-events:none}
+.native-app-root .native-sheet-overlay[data-state=closed]{animation:native-shade-exit 260ms ease-out both}
+.native-app-root .native-sheet[data-dragging],.native-app-root .native-sheet-overlay[data-dragging]{transition:none}
 .native-app-root .pet-form input:focus{scroll-margin:20px}
 .native-app-root .day-card,.native-app-root .metric-tile{min-width:0}
 .native-app-root .insight-marker{touch-action:pan-y}
@@ -42,6 +49,37 @@ body{overscroll-behavior:none}
  .native-app-root .calendar td>button{width:34px}
  .native-app-root .day-insight-detail h2{font-size:25px}
 }
-@keyframes sheet-enter{from{transform:translateY(24px);opacity:.4}to{transform:translateY(0);opacity:1}}
-@keyframes shade-enter{from{opacity:0}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.native-app-root .native-sheet[data-state=open],.native-app-root .native-sheet-overlay[data-state=open]{animation:none}}
+@keyframes native-sheet-enter{from{transform:translate3d(0,100%,0)}to{transform:translate3d(0,0,0)}}
+@keyframes native-sheet-exit{from{transform:translate3d(0,var(--sheet-drag-y,0px),0)}to{transform:translate3d(0,100%,0)}}
+@keyframes native-shade-enter{from{opacity:0}to{opacity:1}}
+@keyframes native-shade-exit{from{opacity:var(--sheet-shade-opacity,1)}to{opacity:0}}
+@media(prefers-reduced-motion:reduce){
+ .native-app-root .native-sheet,.native-app-root .native-sheet-overlay{transition:none}
+ .native-app-root .native-sheet[data-state],.native-app-root .native-sheet-overlay[data-state]{animation:none}
+}
+
+/* Opt-in native-browser centering for the task deck; the simulator adapter is unchanged. */
+.native-app-root .native-carousel-centered{scroll-snap-type:x mandatory}
+.native-carousel-centered>.mobile-carousel-content>article{scroll-snap-align:center;scroll-snap-stop:always}
+
+/* Full-height content flows behind the floating glass dock, including the safe area. */
+.native-app-root .whoof-app:has(.bottom-nav) .whoof-content,
+.native-app-root .whoof-app:has(.chat-composer) .whoof-content{padding-bottom:calc(100px + var(--native-safe-bottom,0px))}
+.native-scroll{z-index:0;scroll-padding-bottom:calc(100px + var(--native-safe-bottom,0px))}
+.native-page::before{
+ content:"";position:absolute;z-index:3;top:0;left:0;right:0;height:calc(40px + env(safe-area-inset-top,0px));pointer-events:none;
+ background:linear-gradient(to bottom,rgba(255,255,255,.84),rgba(255,255,255,.42) 45%,rgba(255,255,255,0));
+ -webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px);
+ -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 18%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 18%,transparent 100%);
+ opacity:var(--top-edge-opacity,0);
+}
+.native-app-root .nav-capsule,.native-app-root .ai-nav{
+ -webkit-backdrop-filter:blur(22px) saturate(145%);backdrop-filter:blur(22px) saturate(145%);
+ box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),inset 0 1px 1px rgba(255,255,255,.9),0 4px 20px rgba(35,43,65,.09),0 0 0 .5px rgba(35,43,65,.06);
+}
+.native-app-root .nav-capsule{background:linear-gradient(145deg,rgba(255,255,255,.76),rgba(255,255,255,.52))}
+.native-app-root .ai-nav{background:linear-gradient(135deg,rgba(226,216,250,.74),rgba(191,216,246,.65))}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ .native-app-root .nav-capsule{background:rgba(255,255,255,.94)}
+ .native-app-root .ai-nav{background:var(--ai-gradient)}
+}

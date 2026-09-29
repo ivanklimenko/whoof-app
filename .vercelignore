@@ -1,0 +1,11 @@
+node_modules
+dist
+qa
+audit
+references
+test-results
+playwright-report
+.git
+
+.env*
+.vercel

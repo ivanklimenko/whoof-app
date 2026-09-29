@@ -186,3 +186,137 @@ When any text-entry control loses focus, dismiss the simulated keyboard. If the 
 - Explicit user request: duplicate design_v1 without simulated device on a separate localhost. Port 4178, bind all interfaces.
 - Native entrypoint/adapters own browser keyboard, scrolling, viewport and safe areas. Preserve source simulator on 4177.
 - This standalone snapshot uses native-main.tsx and src/native; protected simulator files remain intact.
+
+## Early-owner tasks — 25 September 2026
+- Current working version: Whoof/приложение/design v1, native preview 4178. Grayscale functionality and archived mockup remain unchanged.
+- Home includes a compact task card after wellbeing, before the day map. Show first-task progress and expandable instructions directly on Home.
+- Source: Whoof Activity Classes (1).xlsx, sheet Задания. Initial assigned design set uses source rows 2, 29, 172; preserve exact titles/instructions. The 285-row catalogue is not a mandatory checklist or inferred schedule.
+- Task collection uses friendly pastel expandable cards with clear chevrons. Avoid a plain list.
+- Retrospective and Instant: immediately mark completion on «Готово». Interval: «Начать» then «Готово», keeping both timestamps. Do not use the unclear action «Отметить момент».
+- Optional feedback follows marking and never shifts an already captured event time. Failed/partial attempts do not count as completed; retries remain available.
+- Progress, active interval and feedback persist only in this browser via localStorage. No collar acquisition or backend submission is implemented; disclose local-only storage in task details.
+
+## Daily set and catalogue — latest feedback
+- Keep the approved Home card styling and progress. Show four assigned daily tasks in a compact horizontal Carousel with independent quick actions; this latest request supersedes the earlier vertical list. Cards are approximately the height of day-summary cards. Open instructions in a detail sheet and keep «Посмотреть все задания» below the collection.
+- «Посмотреть все задания» opens 12 source-backed cards (10–15 requested). Remove the duplicate «Что нужно сделать» expansion button; the card header is the only expander.
+- Completion is immediate and inline, with undo; do not interrupt each quick mark with a success sheet. Interval tasks start/finish in-place.
+- Daily progress counts only today's assigned set; other catalogue tasks and yesterday's marks do not advance it. The source selection is a prototype fixture, not a scheduling algorithm.
+
+## Task UI consistency — latest feedback
+- Match tasks to the current Fuse-inspired app: shared neutral card surface/border/radius, 16 px padding, shared AccentIcon gradients and neutral secondary actions. Use the same system typography and neutral secondary text as metrics/day summaries.
+- Preserve compact horizontal cards, progress, all-tasks entry, quick completion and detail sheets. Completed actions show an explicit check and «Выполнено»; active interval actions and the detail primary action use the shared black emphasis.
+
+## Task reference implementation and correction
+- Keep the existing gradient AccentIcon symbols; the user explicitly rejected adding dog illustrations. No generated illustration is used in the app.
+- Preserve 204 px task-card height, horizontal Carousel with visible next card and positional dots/hint. Overall completion remains above the collection.
+- Catalogue uses compact cards with a separate 44 px quick-completion/start control and one header expander. Detail sheet identifies ready, in-progress and complete states; show elapsed time only for an active Interval task.
+
+## Centered gradient task deck — latest request
+- Home now presents one almost full-width 180 px-high task card. Adjacent cards peek from both sides after swiping, scaled to 91% with a small inward offset. First/last cards also center; no looping or duplicate tasks.
+- Soft lavender, blue, peach and mint gradients on Home only. Retain shared icons, title, duration, clear quick action, overall progress and full catalogue link; no illustrations.
+- Native-phone Carousel has an opt-in centered mode using browser scroll snapping. This scoped native-adapter exception implements the requested settling behavior; protected simulator Carousel and its no-snap contract remain unchanged. No custom pointer capture or swipe recognizer.
+
+- Task deck overlap refinement: increase neighbouring cards’ inward visual offset from 12 to 36 px so they tuck behind the central card. Keep card size, scale and layout stride unchanged.
+
+- Task deck depth refinement: neighbours now scale to 85% (previously 91%); the central card remains full size and the 36 px inward offset is retained.
+
+## Duplicate cleanup — 25 September 2026
+- One persistent completion status per task; preserve daily aggregate progress, capture timestamps, and a six-second inline undo. Keep source task descriptions intact; adapt instructions at presentation time to avoid duplicate recording instructions.
+- Completed tasks use a static labelled check; pending catalogue actions use an empty circle or Play. Keep the carousel/deck geometry; hide the swipe hint once another card has been viewed.
+- Pet photo editing lives in «Изменить профиль»: one combined photo/label picker, draft until Save; closing discards edits. Profile itself shows the photo and one editing entry.
+- Keep the location status row on Walks and entry in Security; remove the duplicate header action. Merge FAQ/placeholder support into «Помощь».
+- Keep both general AI and metric AI entry points. Metric discussions preserve the selected reading/date/period, separate conversation history from the general chat, and return to the metric sheet.
+- Keep QR and Share primary; place copy/download in «Другие способы» and prototype recipient preview in a separate disclosure. Retain the honest local-only sharing limitations.
+- Keep insight marker and textual entry. Label its return action «К графику»; preserve uncertainty without repeating the hypothesis in the body.
+
+## AI from Home — latest request
+- Both daily-total cards include a soft gradient «Обсудить с AI» action separate from their breakdown button; no nested buttons. The breakdown sheet also offers the same contextual action.
+- Insight details use the same AI action; «К графику» remains a secondary return.
+- AI receives the selected date, actual fixture totals/breakdown or insight evidence and uncertainty. Context conversations remain separate. Back restores the selected day and originating card/sheet.
+
+## Completed daily tasks — latest request
+- Home orders pending daily tasks first, completed tasks last in completion order. After reordering, center the first pending task; preserve the existing deck sizing/gestures.
+- When all assigned daily tasks are complete, replace the carousel with a compact congratulatory banner. Keep progress and «Посмотреть все задания» available.
+- Remove temporary Home undo. Permanent «Отменить выполнение» is in the expanded completed card inside «Все задания». Cancellation returns the task to pending and updates Home; interval tasks restart with a fresh timer rather than resuming an old finished interval.
+
+## AI buttons in daily totals — latest correction
+- Remove AI actions from collapsed Home summary tiles. Keep «Обсудить с AI» only inside movement/rest detail sheets; preserve context and return behaviour. Insight AI remains unchanged.
+
+## Metrics header — latest annotation
+- The metrics screen header contains only «Метрики»; remove the pet-name eyebrow and decorative chart icon. Preserve subtitle, period selector and metric tiles.
+
+## Task progress — latest correction
+- Remove the segmented progress bar above daily tasks; keep only the text count (e.g. «0 из 4»). No streak UI is approved yet. Reset existing preview task completions/active timer once for this revision, then persist new progress normally.
+
+## Native task carousel fix — latest request
+- Snap alignment belongs to stable outer task slots; only the inner card surface scales/translates for the recessed-neighbour effect. Cache slot geometry on resize, batch transform updates in one animation frame, update pagination state only when the nearest card changes.
+- Preserve native touch scrolling, vertical parent scrolling, card reordering and 85% neighbour scale/36px overlap. No custom touch recognizer or scroll-end correction loops.
+- Entire wellbeing headline uses the same dark text colour; «отличное» is no longer grey.
+
+## Bottom-sheet gestures — latest request
+- All native bottom sheets slide fully up from the bottom and back down on dismissal, preserving their content throughout exit. Dragging the 44px top handle moves the sheet and fades its scrim; a short/cancelled drag returns it, a sufficient pull or downward flick dismisses it. Content scrolling stays independent. Respect reduced motion and retain close buttons, backdrop and Escape dismissal.
+- Reset preview task completion and active timers once for the sheet-preview revision; subsequent progress persists normally.
+
+## Glass scroll edges and navigation — latest request
+- Native content scrolls to the bottom of the viewport behind floating navigation; reserve final content padding instead of shortening the scroll viewport. Preserve safe areas and keyboard layout.
+- Scrolled content at the top passes under a light blurred white-to-transparent fade. Its intensity follows the first 28px of scroll; it never blocks gestures.
+- Navigation capsule and AI dock use translucent surfaces, backdrop blur and a restrained glass highlight. No full-width opaque bottom panel.
+
+## Authentication prototype — 28 September 2026
+- First launch shows login, with reciprocal links to email/password registration. Registration requires at least 8 Unicode characters, a lowercase and uppercase letter, digit and punctuation/symbol. Show live requirements, password visibility and inline errors.
+- User explicitly chose a clickable prototype, not real authentication. Credentials exist in memory only until refresh; never persist or transmit passwords. Test fixture: demo@whoof.app / Whoof2026!. Signed-in state lasts until logout or reload.
+- Yandex ID and password recovery honestly show preview flows, no OAuth requests or fake sent-email claims. Settings shows the current preview account and logout. Incoming pet invitations retain their query parameters through authentication.
+
+## Local auth visual refinement — latest feedback
+- Work locally only; do not deploy to Vercel until explicitly requested again.
+- Auth uses the existing app typography, neutral rounded fields and pill buttons. Email submit is the black primary action; Yandex is a light secondary action below it. Keep a compact wordmark/header, shared settings icon styling for logout, readable requirements/errors and a quiet, honest prototype note.
+
+## Auth welcome — latest request
+- First launch and logout show a welcome screen with only two actions: «Создать аккаунт» and «Войти». Email/password fields and Yandex remain on the next screen. Both forms have a back button to welcome.
+- Reserve a large quiet artwork area for an image the user will supply later; do not generate or add an illustration. Keep the wordmark above, short welcome copy and both pill buttons below, respecting the mobile viewport and safe areas.
+- Welcome header uses the supplied `public/assets/whoof/logo.svg` centered at its original aspect ratio, replacing the typed wordmark. Keep the artwork area reserved.
+
+## Local fictional scenarios — friendship walk
+- User explicitly requests local fake scenarios only; do not publish. Home and notifications show «Боня собирается в парк. Присоединитесь?» with one-tap joining.
+- Joining opens an active shared walk in Walks; finishing creates one memory in history with a sample 42-minute / 2.4-km route and generated photo. The same memory is reachable from Home and notifications. Replay removes only this scenario's memory and restores the invitation.
+- All scenario state is in memory. No push, GPS, owner messaging or sharing APIs. Do not interrupt an ordinary recorded walk: joining stays disabled until it ends.
+- `public/assets/whoof/friends-walk.png` is a fictional golden retriever/corgi park photo generated with the built-in imagegen tool, not evidence of a real walk. Prompt and provenance: `references/friend-walk-photo.md`.
+- Simulate an iOS notification inside the web viewport: delayed top entrance on Home, frosted surface, upward swipe/Escape/close dismissal, timed exit, and tap opens the existing invitation. It is delivered once per scenario run; replay triggers it again. Respect notification settings, modal visibility, safe areas and reduced motion. No actual push/OS permissions.
+
+## Remember prototype sign-in — latest request
+- Remember only the preview account email/provider in `whoof.preview-session.v1` localStorage. Refresh and reopening this browser retain sign-in; explicit logout clears it. This supersedes the previous reload-logs-out rule.
+- Passwords and the registration credential map remain memory-only. Stored identity is a UI convenience, not real authentication. Handle malformed or unavailable storage without breaking the app. Keep scenario state separate.
+
+## Manual invitation trigger — latest correction
+- Remove the pending invitation card from Home; retain invitation details under the bell and in Walks, plus active/completed Home states.
+- No automatic iOS banner on launch or scenario replay. An invisible, keyboard-accessible 44px-tall button in the header gap between the pet name and bell schedules it five seconds after tapping. Repeated taps restart one countdown; navigation does not restart it, open sheets defer delivery. Reload clears the pending timer.
+- Respect notification settings and avoid interrupting an active walk. Replay returns to idle; tap the hidden header button to run the notification again.
+
+## Metrics from movement classification — 28 September 2026
+- Replace the previous five metrics with Movement and Sleep. Details show walking/running and night/day sleep durations; Home and Metrics share daily totals. No heart rate, respiration or temperature readings, including mock AI replies. Gait classification does not establish speed in km/h.
+- Food and water are timestamped recognised events, not consumption amounts. Sniffing, scratching and shaking are contextual signals, not permanent tiles.
+- Day shows the existing partial snapshot through 14:30. Week/month show averages over the previous 7/30 completed days and actual per-day bars. Keep period context when opening details and discussing with AI.
+- These are prototype fixtures, not a deployed classifier or live sensor readings. The user subsequently authorised publishing this update to the existing Vercel whoof-app project on 28 September 2026.
+
+## Temporarily remove authentication — latest request
+- The shared prototype opens directly into Home, without login, registration or an account/logout section in Settings. Incoming invitation URLs still open the invitation flow directly. Existing stored identity is ignored; task progress and medical documents remain untouched.
+- Keep the prior auth component dormant for possible restoration; it has no UI entry point. This supersedes the welcome/login gate requirements.
+
+## Design consistency — primary rule
+- Design consistency is the highest-priority rule for all future work. New screens, components, states and interactions must reuse the established visual system, spacing, typography, surfaces, icon treatment, controls and interaction patterns. Do not introduce a separate visual language unless the user explicitly requests a redesign.
+
+## Veterinary insight — 29 September 2026
+- Copy refinement: call the source «устройство», not «ошейник», throughout veterinary screens and the export. Remove the summary captions «Запись в клинику через приложение пока недоступна.» and «2026 год. Еда и питьё — количество подходов.»; do not imply a booking occurred.
+- Latest refinement: the metrics insight is a compact banner without a chart, with the veterinarian action right-aligned. Keep access to the treatment comparison.
+- Approved four-screen concept: metrics insight, reason/attachments, veterinarian change summary, before/after treatment. Reuse existing pastel cards, AccentIcon, type and black pill actions. No «Демо» labels.
+- Activity, rest, food and drinking all come from collar readings in this scenario. Food/drinking are counts of approaches, never consumed grams or millilitres and never owner-diary measurements.
+- Keep data simulated internally, timestamp the insight snapshot, disclose local-only documents, and never claim an appointment or transmission happened without a real integration. Sharing must be user initiated after review.
+- Compare equal periods around a user-supplied treatment start date; use separate chart scales for minutes, hours and counts. Do not infer treatment efficacy or a diagnosis.
+
+## Annual recap story — latest direction
+- The annual recap is a full-screen, tap-through story experience. Do not show a «Начать» button on its cover; the cover advances by tapping or timed progression like the rest of the story.
+- For every annual-recap highlight concept, provide both the complete UI screen and a separate clean background image without text, controls, progress indicators or story chrome. When a dog photo is needed, use the repository asset `public/assets/whoof/dog-color.png`; preserve the photographed dog's identity instead of generating a different dog.
+- Preserve system-level consistency without repeating one composition. Each highlight needs a distinct visual metaphor and layout—such as typography, map, collage, diagram, cropped photography or abstraction. Do not default to a pastel landscape with a large centered dog; the dog may be small, off-center, tightly cropped or absent when the concept is stronger without it.
+- The user's numbered 13-item annual-highlight list is the content source of truth. Preserve its exact titles, figures, claims, wording and use of the names «Джека»/«Джесси» for each corresponding item; do not fact-check, normalize, rewrite or substitute copy unless explicitly requested.
+- Annual-recap concepts may draw from the broader landing-page dog-photo library in `/Users/andrew/Desktop/Андрей/whoof/land-main/assets/`, especially the hero, problem-carousel, community and care images. Prefer these existing project photographs over repeatedly reusing `dog-color.png` or generating replacement dogs; choose a different source image to match each highlight's story.
+- The current Whoof collar is the black woven-fabric collar shown in `references/current-collar/`: an integrated matte-black rectangular sensor housing with rounded corners and an oval front control. Do not use the obsolete blue patterned collar or a separate hanging tracker in new imagery. When adapting an existing landing photo, replace only the obsolete collar/device with this current black collar while preserving the dog and scene.

@@ -1,0 +1,53 @@
+import { test, expect } from '@playwright/test';
+test.use({ channel:'chrome', viewport:{width:390,height:844}, reducedMotion:'reduce' });
+
+test('veterinary review, collar counts, attachments and export', async ({ page }) => {
+ const errors:string[]=[]; page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/');
+ await page.getByRole('button',{name:'Метрики',exact:true}).click();
+ await expect(page.locator('.vet-insight')).toContainText('на 34%');
+ await page.getByRole('button',{name:'Обратиться к ветеринару',exact:true}).click();
+ const body=page.locator('.vet-body');
+ await expect(body).not.toContainText(/демо|дневник/i);
+ await expect(body).toContainText('Еда и питьё — количество подходов');
+ await expect(page.getByRole('button',{name:'Посмотреть сводку'})).toBeDisabled();
+ await page.getByRole('textbox',{name:'Причина обращения',exact:true}).fill('Меньше гуляет и быстрее устаёт.');
+ await page.getByRole('checkbox',{name:'Включить: Питьё'}).uncheck();
+ await body.locator('input[type=file]').setInputFiles({name:'analysis.pdf',mimeType:'application/pdf',buffer:Buffer.from('%PDF-1.4\n')});
+ await expect(body).toContainText('analysis.pdf');
+ await page.getByRole('button',{name:'Посмотреть сводку'}).click();
+ await expect(body.locator('blockquote')).toHaveText('Меньше гуляет и быстрее устаёт.');
+ await expect(body.locator('.vet-table')).toContainText('2 подх.');
+ await expect(body.locator('.vet-table')).not.toContainText('Питьё');
+ const download=page.waitForEvent('download');
+ await page.getByRole('button',{name:'Скачать сводку',exact:true}).click();
+ expect((await download).suggestedFilename()).toBe('whoof-summary.txt');
+ await page.getByRole('button',{name:'Назад к обращению'}).click();
+ await expect(page.getByRole('textbox',{name:'Причина обращения',exact:true})).toHaveValue('Меньше гуляет и быстрее устаёт.');
+ await page.getByRole('button',{name:'Закрыть обращение'}).click();
+ await page.getByRole('button',{name:'Главная',exact:true}).click();
+ await page.getByRole('button',{name:'Метрики',exact:true}).click();
+ await page.getByRole('button',{name:'Обратиться к ветеринару',exact:true}).click();
+ await expect(page.getByRole('textbox',{name:'Причина обращения',exact:true})).toHaveValue('Меньше гуляет и быстрее устаёт.');
+ expect(errors).toEqual([]);
+});
+
+test('treatment comparisons use equal periods and handle missing data', async ({page})=>{
+ await page.setViewportSize({width:320,height:568});
+ await page.goto('/');
+ await page.getByRole('button',{name:'Метрики',exact:true}).click();
+ await page.getByRole('button',{name:'После лечения',exact:true}).click();
+ await expect(page.locator('.vet-empty')).toContainText('Выберите дату начала');
+ await page.getByLabel('Начало лечения',{exact:true}).fill('2026-09-15');
+ await expect(page.locator('.vet-table')).toContainText('88 мин');
+ await expect(page.locator('.vet-chart-card')).toHaveCount(4);
+ await page.getByRole('button',{name:'30 дней',exact:true}).click();
+ await expect(page.getByRole('status')).toContainText('Недостаточно данных');
+ await expect(page.locator('.vet-table')).toHaveCount(0);
+ await page.getByRole('button',{name:'14 дней',exact:true}).click();
+ await expect(page.locator('.vet-table')).toBeVisible();
+ await page.getByRole('textbox',{name:'Новое наблюдение'}).fill('Охотнее выходит гулять');
+ await page.getByRole('button',{name:'Добавить наблюдение',exact:true}).click();
+ await expect(page.locator('.vet-body blockquote')).toContainText('Охотнее выходит гулять');
+ expect(await page.locator('.vet-body').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
+});
